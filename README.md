@@ -8,6 +8,12 @@ Using ChatGPT, I was able to complete the project in roughly half a day. While t
 
 ---
 
+## Disclaimer
+
+The streaming URLs provided in `stations.json` are publicly available and belong to their respective radio stations. This project does not host or modify the streams in any way.
+
+---
+
 ## Features
 
 - Play online radio streams with `mpv`
@@ -129,4 +135,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## Contributions
 
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
-
+```

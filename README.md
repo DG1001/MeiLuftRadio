@@ -45,11 +45,16 @@ Using ChatGPT, I was able to complete the project in roughly half a day. While t
    ```bash
    cd ansible
    ```
-2. Execute the Ansible playbook to configure the Raspberry Pi:
+2. Edit the `inventory.ini` file to specify the target Raspberry Pi. You can use either the IP address or the hostname (e.g., `webradio.local`). Example:
+   ```ini
+   [raspberry_pi]
+   webradio.local ansible_user=pi ansible_password=pi
+   ```
+3. Execute the Ansible playbook to configure the Raspberry Pi:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml
    ```
-3. The playbook installs all necessary software, deploys the application, and sets up the autostart service.
+4. The playbook installs all necessary software, deploys the application, and sets up the autostart service.
 
 ### 3. Access the Web Interface
 

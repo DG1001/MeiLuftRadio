@@ -1,6 +1,12 @@
 # Webradio Project
 
-A lightweight Flask-based web application for playing online radio stations on a Raspberry Pi using `mpv`. This project provides a simple web interface for controlling radio playback, including options for selecting stations, stopping playback, uploading/downloading station lists, and displaying the current song title (`icy-title`).
+## Introduction
+
+This project started as an experiment. I had one or two Raspberry Pi 1 devices lying around unused, and I thought it would be a great idea to repurpose them. Creating a web radio seemed like a manageable task for this somewhat outdated hardware. The twist? I decided to rely on AI to help develop it.
+
+Using ChatGPT, I was able to complete the project in roughly half a day. While there were multiple iterations and refinements, the process felt significantly faster than traditional development. As an IT professional, I appreciated how AI handled tasks like syntax lookups, API adjustments, and even debugging. For troubleshooting, I often just pasted log outputs into the chat, which brought me remarkably close to the solution. This approach eliminated much of the drudgery typically associated with development and let me focus on the creative and technical aspects.
+
+---
 
 ## Features
 
@@ -8,14 +14,15 @@ A lightweight Flask-based web application for playing online radio stations on a
 - Simple and responsive web interface
 - Upload and download station lists in JSON format
 - Display the current song title (`icy-title`) in real-time
-- Written in Python with Flask
+- Autostart on boot using `systemd`
+- Developed with Python (Flask) and Ansible for setup automation
 
 ---
 
 ## Requirements
 
 - Raspberry Pi OS Lite (32-bit)
-- Raspberry Pi with network and audio output
+- Raspberry Pi 1 (or newer)
 - Python 3.7 or higher
 - `mpv` for audio playback
 - Flask for the web interface
@@ -24,24 +31,32 @@ A lightweight Flask-based web application for playing online radio stations on a
 
 ## Installation
 
-### 1. Run Ansible Setup
+### 1. Prepare the Raspberry Pi
 
-1. Ensure you are in the `ansible` directory:
+1. Use the Raspberry Pi Imager to prepare an SD card with Raspberry Pi OS Lite (32-bit).
+2. During the setup, configure WiFi and set the username to `pi` and password to `pi`.
+3. If using a Raspberry Pi 1, note that it does not have built-in WiFi:
+   - Connect via Ethernet.
+   - Alternatively, use a compatible USB WiFi adapter and configure WiFi during the imaging process.
+
+### 2. Run Ansible Setup
+
+1. Navigate to the `ansible` directory:
    ```bash
    cd ansible
    ```
-2. Run the Ansible playbook to configure the Raspberry Pi:
+2. Execute the Ansible playbook to configure the Raspberry Pi:
    ```bash
    ansible-playbook -i inventory.ini playbook.yml
    ```
-3. Verify that the application files have been deployed to `/home/pi/webradio` on the target system.
+3. The playbook installs all necessary software, deploys the application, and sets up the autostart service.
 
-### 2. Access the Web Interface
+### 3. Access the Web Interface
 
-1. Open a web browser and navigate to:
-   ```
-   http://<raspberry-pi-ip>:5000
-   ```
+Open a web browser and navigate to:
+```
+http://<raspberry-pi-ip>:5000
+```
 
 ---
 
@@ -57,7 +72,7 @@ A lightweight Flask-based web application for playing online radio stations on a
 
 ### Managing Stations
 
-The stations are defined in the `stations.json` file. Example format:
+Stations are defined in the `stations.json` file. Example format:
 ```json
 {
     "Radio Bob": "http://streams.radiobob.de/bob-live/mp3-192/mediaplayer",
@@ -83,8 +98,10 @@ project/
 │   ├── stations.json     # List of radio stations
 │   ├── templates/
 │   │   └── index.html    # HTML for the web interface
-│   └── static/
-│       └── style.css     # Styling for the web interface
+│   ├── static/
+│   │   └── style.css     # Styling for the web interface
+│   └── webradio.service  # Systemd service file for autostart
+├── LICENSE               # License file (MIT License)
 └── README.md             # Project documentation
 ```
 
@@ -92,9 +109,9 @@ project/
 
 ## Future Enhancements
 
-- Add persistent autostart for the application on boot
-- Support for multiple playback backends
-- Enhanced error handling for stream playback
+- Support for persistent volume management
+- Add more complex playback controls (e.g., pause, rewind)
+- Improve error handling for unsupported streams
 
 ---
 
@@ -107,3 +124,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ## Contributions
 
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
+

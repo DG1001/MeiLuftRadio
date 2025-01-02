@@ -1,0 +1,12 @@
+- name: Setup Webradio Environment
+  hosts: raspberry_pi
+  become: true
+
+  vars:
+    app_source_dir: "../../src"
+
+  tasks:
+    - name: Include Webradio setup
+      include_role:
+        name: webradio
+

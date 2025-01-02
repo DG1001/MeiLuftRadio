@@ -1,0 +1,43 @@
+- name: Update and upgrade the system
+  apt:
+    update_cache: yes
+    upgrade: dist
+    autoremove: yes
+
+- name: Install required packages
+  apt:
+    name:
+      - mpv
+      - python3
+      - python3-flask
+    state: present
+
+- name: Create web radio directory
+  file:
+    path: /home/pi/webradio
+    state: directory
+    owner: pi
+    group: pi
+    mode: "0755"
+
+- name: Copy application files
+  copy:
+    src: "{{ app_source_dir }}/{{ item.src }}"
+    dest: "/home/pi/webradio/{{ item.dest }}"
+    owner: pi
+    group: pi
+    mode: "0755"
+  with_items:
+    - { src: "app.py", dest: "app.py" }
+    - { src: "stations.json", dest: "stations.json" }
+    - { src: "templates/index.html", dest: "templates/index.html" }
+    - { src: "static/style.css", dest: "static/style.css" }
+
+- name: Test mpv installation
+  command: mpv --version
+  register: mpv_version
+  changed_when: false
+
+- debug:
+    msg: "MPV Version: {{ mpv_version.stdout_lines }}"
+

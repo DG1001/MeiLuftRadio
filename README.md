@@ -1,5 +1,7 @@
 # Webradio Project
 
+![Webradio Logo](doc/images/logo.png)
+
 ## Introduction
 
 This project started as an experiment. I had one or two Raspberry Pi 1 devices lying around unused, and I thought it would be a great idea to repurpose them. Creating a web radio seemed like a manageable task for this somewhat outdated hardware. The twist? I decided to rely on AI to help develop it.
@@ -11,6 +13,16 @@ Using ChatGPT, I was able to complete the project in roughly half a day. While t
 ## Disclaimer
 
 The streaming URLs provided in `stations.json` are publicly available and belong to their respective radio stations. This project does not host or modify the streams in any way.
+
+---
+
+## Screenshots
+
+### Web Interface
+![Web Interface](doc/images/web_interface.png)
+
+### Raspberry Pi Setup
+![Raspberry Pi Setup](doc/images/raspberry_pi_setup.jpg)
 
 ---
 
@@ -112,6 +124,11 @@ project/
 │   ├── static/
 │   │   └── style.css     # Styling for the web interface
 │   └── webradio.service  # Systemd service file for autostart
+├── doc/                  # Documentation and images
+│   └── images/           # Directory for screenshots and other images
+│       ├── web_interface.png
+│       ├── raspberry_pi_setup.jpg
+│       └── logo.png
 ├── LICENSE               # License file (MIT License)
 └── README.md             # Project documentation
 ```

@@ -1,12 +1,13 @@
 # Webradio Project
 
-A lightweight Flask-based web application for playing online radio stations on a Raspberry Pi using `mpv`. This project provides a simple web interface for controlling radio playback, including options for selecting stations, stopping playback, and uploading/downloading station lists.
+A lightweight Flask-based web application for playing online radio stations on a Raspberry Pi using `mpv`. This project provides a simple web interface for controlling radio playback, including options for selecting stations, stopping playback, uploading/downloading station lists, and displaying the current song title (`icy-title`).
 
 ## Features
 
 - Play online radio streams with `mpv`
 - Simple and responsive web interface
 - Upload and download station lists in JSON format
+- Display the current song title (`icy-title`) in real-time
 - Written in Python with Flask
 
 ---
@@ -76,6 +77,7 @@ A lightweight Flask-based web application for playing online radio stations on a
 - **Stop playback**: Click the "Stop" button.
 - **Upload station list**: Use the upload button to add a new `stations.json`.
 - **Download station list**: Use the download button to export the current station list.
+- **View current song title**: The current song title (`icy-title`) is displayed and updated in real-time.
 
 ### Managing Stations
 
@@ -93,12 +95,20 @@ The stations are defined in the `stations.json` file. Example format:
 
 ```
 project/
-├── app.py                 # Flask application
-├── stations.json          # List of radio stations
-├── templates/
-│   └── index.html         # HTML for the web interface
-└── static/
-    └── style.css          # Styling for the web interface
+├── ansible/              # Ansible configuration for setup
+│   ├── playbook.yml      # Main Ansible playbook
+│   ├── inventory.ini     # Inventory file for target hosts
+│   └── roles/
+│       └── tasks/
+│           └── main.yml  # Tasks for Webradio setup
+├── src/                  # Source files for the Webradio application
+│   ├── app.py            # Flask application
+│   ├── stations.json     # List of radio stations
+│   ├── templates/
+│   │   └── index.html    # HTML for the web interface
+│   └── static/
+│       └── style.css     # Styling for the web interface
+└── README.md             # Project documentation
 ```
 
 ---

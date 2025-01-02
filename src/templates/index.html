@@ -27,6 +27,7 @@
             </form>
         </div>
         <p id="status">Status: Bereit</p>
+        <p id="current-title">Titel: Kein Stream aktiv</p>
     </div>
     <script>
         function playStation(station) {
@@ -49,6 +50,7 @@
             }).then(response => {
                 if (response.ok) {
                     document.getElementById("status").innerText = "Status: Wiedergabe gestoppt";
+                    document.getElementById("current-title").innerText = "Titel: Kein Stream aktiv";
                 } else {
                     document.getElementById("status").innerText = "Status: Fehler beim Stoppen!";
                 }
@@ -78,7 +80,17 @@
             const section = document.getElementById("upload-download-section");
             section.classList.toggle("hidden");
         }
+
+        function updateCurrentTitle() {
+            fetch("/current_title")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("current-title").innerText = `Titel: ${data.title}`;
+                });
+        }
+
+        // Aktualisiere den Titel alle 5 Sekunden
+        setInterval(updateCurrentTitle, 5000);
     </script>
 </body>
 </html>
-

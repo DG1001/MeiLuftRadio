@@ -56,3 +56,17 @@
 
 - debug:
     msg: "MPV Version: {{ mpv_version.stdout_lines }}"
+
+- name: Copy systemd service file
+  copy:
+    src: "{{ app_source_dir }}/webradio.service"
+    dest: /etc/systemd/system/webradio.service
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Enable and start the Webradio service
+  systemd:
+    name: webradio.service
+    enabled: true
+    state: started

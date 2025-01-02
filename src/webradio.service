@@ -1,0 +1,12 @@
+[Unit]
+Description=Webradio Flask App
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/webradio
+ExecStart=/usr/bin/python3 /home/pi/webradio/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,27 @@
+# Ignore settings and workspace files for VSCode
+.vscode/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ansible artifacts
+*.retry
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Python virtual environments
+venv/
+
+# Node modules (if any)
+node_modules/

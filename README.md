@@ -8,6 +8,8 @@ This project started as an experiment. I had one or two Raspberry Pi 1 devices l
 
 Using ChatGPT, I was able to complete the project in roughly half a day. While there were multiple iterations and refinements, the process felt significantly faster than traditional development. As an IT professional, I appreciated how AI handled tasks like syntax lookups, API adjustments, and even debugging. For troubleshooting, I often just pasted log outputs into the chat, which brought me remarkably close to the solution. This approach eliminated much of the drudgery typically associated with development and let me focus on the creative and technical aspects.
 
+BTW, the logo for this project was also AI-generated. While the results from ChatGPT's suggestions (via DALL-E) were interesting, they weren't quite what I was looking for. So, I asked ChatGPT to create a tailored prompt for our locally running Flux.schnell image generator. One of the generated logos made its way into this project.
+
 ---
 
 ## Disclaimer

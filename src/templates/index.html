@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webradio</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Webradio 🎵</h1>
+        <p>Wähle deinen Lieblingssender:</p>
+        <div class="station-list">
+            {% for name in stations.keys() %}
+            <button class="station-button" onclick="playStation('{{ name }}')">{{ name }}</button>
+            {% endfor %}
+        </div>
+        <div class="controls">
+            <button class="control-button stop" onclick="stopPlayback()">Stop</button>
+        </div>
+        <button class="toggle-button" onclick="toggleUploadDownload()">⬇️⬆️ Upload/Download Stations</button>
+        <div id="upload-download-section" class="hidden">
+            <button class="control-button" onclick="downloadStations()">⬇️ Download Stations</button>
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" id="file-input" name="file" accept=".json" />
+                <button type="button" class="control-button" onclick="uploadStations()">⬆️ Upload Stations</button>
+            </form>
+        </div>
+        <p id="status">Status: Bereit</p>
+    </div>
+    <script>
+        function playStation(station) {
+            fetch("/play", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "station=" + encodeURIComponent(station)
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById("status").innerText = `Status: Spiele ${station}`;
+                } else {
+                    document.getElementById("status").innerText = "Status: Fehler beim Starten des Streams!";
+                }
+            });
+        }
+
+        function stopPlayback() {
+            fetch("/stop", {
+                method: "POST"
+            }).then(response => {
+                if (response.ok) {
+                    document.getElementById("status").innerText = "Status: Wiedergabe gestoppt";
+                } else {
+                    document.getElementById("status").innerText = "Status: Fehler beim Stoppen!";
+                }
+            });
+        }
+
+        function downloadStations() {
+            window.location.href = "/download_stations";
+        }
+
+        function uploadStations() {
+            const formData = new FormData(document.getElementById("upload-form"));
+            fetch("/upload_stations", {
+                method: "POST",
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    alert("Stationsliste erfolgreich aktualisiert.");
+                    location.reload();
+                } else {
+                    alert("Fehler beim Hochladen der Stationsliste.");
+                }
+            });
+        }
+
+        function toggleUploadDownload() {
+            const section = document.getElementById("upload-download-section");
+            section.classList.toggle("hidden");
+        }
+    </script>
+</body>
+</html>
+

@@ -24,43 +24,19 @@ A lightweight Flask-based web application for playing online radio stations on a
 
 ## Installation
 
-### 1. Set up the Raspberry Pi
+### 1. Run Ansible Setup
 
-1. Install Raspberry Pi OS Lite (32-bit) on your SD card.
-2. Connect your Raspberry Pi to the network.
-3. Update and upgrade the system:
+1. Ensure you are in the `ansible` directory:
    ```bash
-   sudo apt update && sudo apt upgrade -y
+   cd ansible
    ```
+2. Run the Ansible playbook to configure the Raspberry Pi:
+   ```bash
+   ansible-playbook -i inventory.ini playbook.yml
+   ```
+3. Verify that the application files have been deployed to `/home/pi/webradio` on the target system.
 
-### 2. Install Dependencies
-
-1. Install required software:
-   ```bash
-   sudo apt install mpv python3 python3-pip python3-flask -y
-   ```
-2. Test `mpv` to ensure it works:
-   ```bash
-   mpv http://streams.radiobob.de/bob-live/mp3-192/mediaplayer
-   ```
-
-### 3. Set Up the Web Application
-
-1. Clone or copy the project files into a directory:
-   ```bash
-   mkdir -p ~/webradio
-   cp app.py stations.json templates/index.html static/style.css ~/webradio/
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd ~/webradio
-   ```
-3. Start the application:
-   ```bash
-   python3 app.py
-   ```
-
-### 4. Access the Web Interface
+### 2. Access the Web Interface
 
 1. Open a web browser and navigate to:
    ```
@@ -99,8 +75,9 @@ project/
 │   ├── playbook.yml      # Main Ansible playbook
 │   ├── inventory.ini     # Inventory file for target hosts
 │   └── roles/
-│       └── tasks/
-│           └── main.yml  # Tasks for Webradio setup
+│       └── webradio/
+│           └── tasks/
+│               └── main.yml  # Tasks for Webradio setup
 ├── src/                  # Source files for the Webradio application
 │   ├── app.py            # Flask application
 │   ├── stations.json     # List of radio stations

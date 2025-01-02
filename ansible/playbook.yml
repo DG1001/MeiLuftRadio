@@ -3,7 +3,7 @@
   become: true
 
   vars:
-    app_source_dir: "../../src"
+    app_source_dir: "../src"
 
   tasks:
     - name: Include Webradio setup
